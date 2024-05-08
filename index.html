@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: #0bab83;
+    display: grid;
+    place-items: center;
+    color:greenyellow;
+}
+form {
+    background-color: #020607;
+    padding: 80px;
+    width: 60%;
+    text-align: center;
+}
+#tempCalc label {
+    font-size: 30px;
+}
+#temp {
+    border: none;
+    padding: 10px;
+    height: 40px;
+    width: 100px;
+    font-size: 20px;
+    margin-top: 20px;
+}
+#tempChoose {
+    height: 40px;
+    border: none;
+    margin-top: 20px;
+    font-size: 15px;
+    vertical-align: top;
+}
+[type="submit"] {
+    height: 35px;
+    margin: 20px;
+    width: 100px;
+    font-size: 15px;
+    border: none;
+    background-color: rgb(186, 6, 6);
+    color: white;
+}
+#result {
+    font-size: 35px;
+}
+    </style>
+    <title>Internship Project</title>
+</head>
+<body>
+    <form id="tempCalc" onsubmit="calcTemp(); return false">
+        <label for="temp"><code>Enter the temperature and choose to unit in which you want to convert:</code></label>
+        <br /> <input type="number" name="temp" id="temp">
+        <select name="tempChoose" id="tempChoose">
+            <option value="cel">°Celsius</option>
+            <option value="fah">°Fahrenheit</option>
+        </select> <br />
+        <input type="submit" name="temp" value="Convert"> <br />
+        <span id="result"></span>
+    </form>
+    <script>
+      const calcTemp = () => {
+    const temperature = document.getElementById('temp').value;
+    const tempChoice = document.getElementById('tempChoose');
+    const valueTemp = tempChoose.options[tempChoice.selectedIndex].value;
+    const ctof = (cel) => {
+        let fahrenheit = Math.round((cel * 9 / 5) + 32);
+        return fahrenheit;
+    }
+    const ftoc = (fah) => {
+        let celsius = Math.round((fah - 32) * 5 / 9);
+        return celsius;
+    }
+    let result;
+    if (valueTemp == 'cel') {
+        result = ctof(temperature);
+        document.getElementById('result').innerHTML = `= <code> ${result}°Fahrenheit </code>`;
+    } else {
+        result = ftoc(temperature);
+        document.getElementById('result').innerHTML = `= <code> ${result}°celsius </code>`;
+    }
+}
+    </script> 
+</body>
+</html>
